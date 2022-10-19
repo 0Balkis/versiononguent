@@ -1486,7 +1486,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Arnea magent
+  m_text: Arena magent
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e1695c82df14c74084770f457067f67, type: 2}
   m_sharedMaterial: {fileID: -1424214985875825855, guid: 9e1695c82df14c74084770f457067f67,
