@@ -4,29 +4,24 @@ using UnityEngine;
 
 public class attackDIST_V2 : MonoBehaviour {
 
-    // SCRIPT A METTRE SUR LE JOUEUR, 
-    // Il a besoin d'une arme (Exemple : Un pistolet) qui sera enfant de votre personnage et qui servira de point de départ du projectile
-    // Il marche en combinaison avec un projectile (qui sera un object avec un visuel, un trigger et un rigidbody. Exemple : un boulet de canon)
-    // Ce script permet de tirer en direction de la souris
+
 
     public int degats = 1;
-    public Transform weapon;                    // L'object qui va tirer votre projectile, doit être en enfant de votre personnage (exemple : Un pistolet)
-    private Vector3 positionWeapon;             // Les coordonnées de l'arme, nous servira a positionner correctement l'arme quand on regarde a gauche
-    public GameObject projectil;                // Le prefab du projectile que l'on tir, on doit glisser dans cette case un prefab avec un trigger ET un rigidbody2D
-    private GameObject projectilSave;           // Une sauvegarde temporaire du projectile tiré pour lui apporté quelques modification quand on l'invoque
+    public Transform weapon;                    
+    private Vector3 positionWeapon;            
+    public GameObject projectil;                
+    private GameObject projectilSave;          
+    public float speedProjectil = 1f;           
+    public float reloadTime = 0.5f;             
+    private bool reloading;                   
 
-    public float speedProjectil = 1f;           // La vitesse de déplacement de notre projectile (valeur de base = 1)
+    private Vector3 mousePos;                  
+    private Vector3 direction;                  
+    private float angleProjectil;               
 
-    public float reloadTime = 0.5f;             // Le temps de chargement entre 2 tirs (valeur de base = 0.5)
-    private bool reloading;                     // Booléen qui devient vrai le temps qu'on recharge
+    private SpriteRenderer skin;                
 
-    private Vector3 mousePos;                   // Vector3 pour stocker la position de la souris
-    private Vector3 direction;                  // Vector3 pour calculer la direction du projectile
-    private float angleProjectil;               // rotation que devra avoir projectile pour "regarder" dans la direction ou il va
-
-    private SpriteRenderer skin;                // Le sprite du joueur, on va s'en servir pour savoir si il regarde à gauche ou a droite
-
-    private Animator anim;                      // L'animator du joueur, ça nous permettra de lancer l'animation d'attaque quand on va tirer
+    private Animator anim;                      
 
     void Start() {
         if (!PlayerPrefs.HasKey("degatDIST")) {
