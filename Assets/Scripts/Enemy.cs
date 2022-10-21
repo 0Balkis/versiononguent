@@ -115,7 +115,7 @@ public class Enemy : MonoBehaviour
 
     void stopChase()
     {
-        rb.velocity = new Vector2(0, 0);
+        //rb.velocity = new Vector2(0, 0);
         //rb.velocity = Vector2.zero;
     }
 
