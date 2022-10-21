@@ -51,11 +51,19 @@ public class Controls : MonoBehaviour
             //attackPosition = (Vector2)transform.position + new Vector2(-attackPositionSave.x, attackPositionSave.y);
             //attackPoint = (Vector2)transform.position + new Vector2(-attackPointSave.x, attackPointSave.y);
         }
+        if (Input.GetAxis("Vertical") < 0)
+        {
+            direction = -2;
+        }
+        if (Input.GetAxis("Vertical") > 0)
+        {
+            direction = 2;
+        }
 
         anim.SetFloat("velocityX", Mathf.Abs(rb.velocity.x));
         anim.SetFloat("velocityY", rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && !dashing && !waitForDash)
+        if (Input.GetKeyDown(KeyCode.Space) && !dashing && !waitForDash)
         {
             //Mettre ici une ligne pour lancer l'animation de Dash
             anim.SetTrigger("dash");
@@ -66,13 +74,21 @@ public class Controls : MonoBehaviour
                 //collider.size = new Vector2(2.932996f, 0.639156f);
                 //collider.direction = 0;
             }
-            if (direction == 1)
+            if (direction == 1 )
             {
                 dashTarget = transform.position.x + dashLenght;
             }
             if (direction == -1)
             {
                 dashTarget = transform.position.x - dashLenght;
+            }
+            if (direction == 2)
+            {
+                dashTarget = transform.position.y + dashLenght;
+            }
+            if (direction == -2)
+            {
+                dashTarget = transform.position.y - dashLenght;
             }
         }
 
@@ -93,11 +109,43 @@ public class Controls : MonoBehaviour
                         //collider.direction = 1;
                     }
                 }
+            }
+            if (direction == 2)
+            {
+                rb.velocity = new Vector2(0, dashSpeed);
+                if (transform.position.x > dashTarget)
+                {
+                    anim.SetBool("dashing", false);
+                    dashing = false;
+                    StartCoroutine("dashingRoutine");
+                    waitForDash = true;
+                    if (GetComponent<Collider>() != null)
+                    {
+                        //collider.size = new Vector2(0.639156f, 2.932996f);
+                        //collider.direction = 1;
+                    }
+                }
 
             }
             if (direction == -1)
             {
                 rb.velocity = new Vector2(-dashSpeed, 0);
+                if (transform.position.x < dashTarget)
+                {
+                    anim.SetBool("dashing", false);
+                    dashing = false;
+                    StartCoroutine("dashingRoutine");
+                    waitForDash = true;
+                    if (GetComponent<Collider>() != null)
+                    {
+                        //collider.size = new Vector2(0.639156f, 2.932996f);
+                        //collider.direction = 1;
+                    }
+                }
+            }
+            if (direction == -2)
+            {
+                rb.velocity = new Vector2(0, -dashSpeed);
                 if (transform.position.x < dashTarget)
                 {
                     anim.SetBool("dashing", false);
