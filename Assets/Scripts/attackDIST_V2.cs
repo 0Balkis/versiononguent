@@ -30,6 +30,7 @@ public class attackDIST_V2 : MonoBehaviour {
     private Animator anim;                      // L'animator du joueur, ça nous permettra de lancer l'animation d'attaque quand on va tirer
 
     void Start() {
+        
         if (!PlayerPrefs.HasKey("degatDIST")) {
             PlayerPrefs.SetInt("degatDIST", degats);
         }
@@ -40,9 +41,10 @@ public class attackDIST_V2 : MonoBehaviour {
     }
 
     void Update() {
+        Debug.Log(Screen.width + "width");
         Debug.Log(GetComponent<Transform>()) ;
         mousePos = (Input.mousePosition);    // On récupère la position de la souris et on transforme ça en coordonnée local dans le jeu
-        mousePos = (mousePos - new Vector3(960, 540, 0));
+        mousePos = (mousePos - new Vector3(Screen.width/2, Screen.height/2, 0));
         mousePos.z = transform.position.z;                              // On dit que la position en Z de la souris est égale à celle du joueur (pour être sur que le projectile sera sur le même plan que le personnage)
         direction = mousePos - weapon.position;                         // Cacule basique d'une direction : (position de votre cible) - (votre position) =  direction entre vous et la cible
         direction.Normalize();                                          // On donne à la direction une longueur de 1 mètre, plus simple pour faire nos future calcules
