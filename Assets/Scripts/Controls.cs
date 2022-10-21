@@ -113,7 +113,7 @@ public class Controls : MonoBehaviour
             if (direction == 2)
             {
                 rb.velocity = new Vector2(0, dashSpeed);
-                if (transform.position.x > dashTarget)
+                if (transform.position.y > dashTarget)
                 {
                     anim.SetBool("dashing", false);
                     dashing = false;
@@ -146,7 +146,7 @@ public class Controls : MonoBehaviour
             if (direction == -2)
             {
                 rb.velocity = new Vector2(0, -dashSpeed);
-                if (transform.position.x < dashTarget)
+                if (transform.position.y < dashTarget)
                 {
                     anim.SetBool("dashing", false);
                     dashing = false;
